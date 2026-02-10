@@ -1,27 +1,24 @@
 import { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
 import { AuthProvider, useAuth } from "./context/AuthContext";
 
-// Import Pages
+// Pages
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import CinemaList from "./pages/CinemaList";
 import Booking from "./pages/Booking";
 
+// Protected Route
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
-
   const storedUser = localStorage.getItem("currentUser");
 
   if (!user && !storedUser) {
-    return <Navigate to="/" />;
+    return <Navigate to="/" replace />;
   }
+
   return children;
 };
 
@@ -55,6 +52,7 @@ function App() {
     if (users.find((u) => u.email === userData.email)) {
       return false;
     }
+
     users.push(userData);
     localStorage.setItem("users", JSON.stringify(users));
     return true;
@@ -67,7 +65,7 @@ function App() {
 
   return (
     <AuthProvider value={{ user, login, register, logout }}>
-      <Router>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -99,7 +97,7 @@ function App() {
             }
           />
         </Routes>
-      </Router>
+      </BrowserRouter>
     </AuthProvider>
   );
 }
