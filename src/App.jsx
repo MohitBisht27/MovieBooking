@@ -4,11 +4,11 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 
 // Pages
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
-import CinemaList from "./pages/CinemaList";
-import Booking from "./pages/Booking";
+import Login from "./Pages/login";
+import Register from "./Pages/register";
+import Dashboard from "./Pages/dashboard";
+import CinemaList from "./Pages/cinemaList";
+import Booking from "./Pages/booking";
 
 // Protected Route
 const ProtectedRoute = ({ children }) => {
